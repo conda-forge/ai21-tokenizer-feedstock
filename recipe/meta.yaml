@@ -1,5 +1,5 @@
 {% set name = "ai21-tokenizer" %}
-{% set version = "0.12.0" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ai21_tokenizer-{{ version }}.tar.gz
-  sha256: d2a5b17789d21572504b7693148bf66e692bdb3ab563023dbcbee340bcbd11c6
+  sha256: d41d00b194ebe6fed03c634f85da404b77dd8d93bf3f3ec683e20b92f92a52cb
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
