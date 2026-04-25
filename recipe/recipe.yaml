@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: ai21-tokenizer
+  version: 1.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/ai21_tokenizer-${{ version }}.tar.gz
+  sha256: aa511dc7d9717176fe37b24868cef5f8a568c4d3ab6ed336da69da10d7771c92
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - poetry-core
+    - pip
+  run:
+    - python >=${{ python_min }},<4.0.0
+    - sentencepiece >=0.2.0,<1.0.0
+    - tokenizers >=0.15.0,<1.0.0
+    - anyio >=4.4.0,<5.0.0
+
+tests:
+  - python:
+      imports:
+        - ai21_tokenizer
+      python_version: ${{ python_min }}.*
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - pip check
+
+about:
+  summary: AI21's Jurassic models tokenizers
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/AI21Labs/ai21-tokenizer
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
